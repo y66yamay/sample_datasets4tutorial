@@ -1,0 +1,4 @@
+group,n_subjects,depression_score_mean,depression_score_sd,depression_score_median,mania_score_mean,mania_score_sd,mania_score_median,press_rate_sec_mean,press_rate_sec_sd,press_rate_sec_median,mean_reward_mean,mean_reward_sd,mean_reward_median,p_better_mean,p_better_sd,p_better_median,n_trials_mean,n_trials_sd,n_trials_median
+HC,34,1.5,2.063,0.0,0.088,0.379,0.0,1.647,0.48,1.545,0.114,0.01,0.116,0.506,0.059,0.495,1313.471,333.024,1246.5
+MDD,34,14.324,7.104,14.0,2.441,5.428,0.0,1.739,0.571,1.785,0.107,0.011,0.106,0.513,0.093,0.518,1379.0,382.661,1442.5
+BD,33,8.758,6.529,7.0,4.424,5.836,2.0,1.515,0.419,1.47,0.108,0.009,0.105,0.526,0.061,0.51,1233.545,291.855,1204.0
