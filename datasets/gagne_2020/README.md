@@ -58,8 +58,14 @@ python3 scripts/make_report.py    # → docs/report.pdf
 ![exp1 群別サマリ](docs/figures/exp1_group_summary.png)
 ![ボラティリティ適応](docs/figures/volatility_switch.png)
 
+## 引用（Reference）
+> Gagne, C., Zika, O., Dayan, P., & Bishop, S. J. (2020). Impaired adaptation
+> of learning to contingency volatility in internalizing psychopathology.
+> *eLife*, 9, e61387. https://doi.org/10.7554/eLife.61387
+
+BibTeX と ISSN 等の詳細は [`data/raw/SOURCE.md`](data/raw/SOURCE.md) を参照。
+
 ## 出所・ライセンス
 取得元 <https://github.com/crgagne/volatility_paper_elife>（`data/` のみ）。
 eLife 論文は **CC-BY 4.0**（DOI: 10.7554/eLife.61387、恒久保管 OSF: osf.io/8mzuj）。
-再配布時は論文とOSFを出典明記し、論文を引用すること。詳細は
-[`data/raw/SOURCE.md`](data/raw/SOURCE.md)。
+再配布時は論文とOSFを出典明記し、上記論文を引用すること。

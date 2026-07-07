@@ -16,11 +16,31 @@ data_raw_exp2/                       # exp2 行動データ（同上, 294ファ�
 item_level_data_for_bifactor_analysis/  # bifactor分析用の項目レベル回答
 ```
 
-## 論文・DOI
-Christopher Gagne, Ondrej Zika, Peter Dayan, Sonia J. Bishop (2020)
-"Impaired adaptation of learning to contingency volatility in internalizing
-psychopathology." *eLife* 9:e61387.
-DOI: <https://doi.org/10.7554/eLife.61387>
+## 論文・引用（Reference）
+
+**APA:**
+> Gagne, C., Zika, O., Dayan, P., & Bishop, S. J. (2020). Impaired adaptation
+> of learning to contingency volatility in internalizing psychopathology.
+> *eLife*, 9, e61387. https://doi.org/10.7554/eLife.61387
+
+- 誌名: *eLife* ・ 巻: 9 ・ 論文番号(elocation-id): e61387
+- DOI: <https://doi.org/10.7554/eLife.61387>
+- ISSN: 2050-084X
+
+**BibTeX:**
+```bibtex
+@article{gagne2020impaired,
+  title   = {Impaired adaptation of learning to contingency volatility in internalizing psychopathology},
+  author  = {Gagne, Christopher and Zika, Ondrej and Dayan, Peter and Bishop, Sonia J.},
+  journal = {eLife},
+  volume  = {9},
+  pages   = {e61387},
+  year    = {2020},
+  doi     = {10.7554/eLife.61387},
+  url     = {https://doi.org/10.7554/eLife.61387},
+  publisher = {eLife Sciences Publications, Ltd}
+}
+```
 
 ## ライセンス・出典
 eLife 論文は **CC-BY 4.0**。ただし上流リポジトリに明示的な LICENSE ファイルは
