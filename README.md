@@ -9,8 +9,9 @@
 | データセット | 課題 | 対象・ラベル | 状態 |
 |---|---|---|---|
 | [`dezfouli_2019`](datasets/dezfouli_2019/) | 2択バンディット | MDD 34 / BD 33 / HC 34（診断＋躁・抑うつスコア） | ✅ 整備済 |
+| [`gagne_2020`](datasets/gagne_2020/) | 随伴性ボラティリティ課題（2択） | exp1: GAD/MDD/対照 87名 ・ exp2: online 147名（多数の症状スコア） | ✅ 整備済 |
 
-> 追加のデータセットはこれから検討・整備します（本リポジトリでは自動追加は行いません）。
+> 追加のデータセットは相談のうえ整備します（本リポジトリでは自動追加は行いません）。
 
 詳細は各データセットの README と [`datasets/README.md`](datasets/README.md) を参照。
 
@@ -24,6 +25,11 @@ datasets/
     data/{raw,processed}/
     scripts/                    # preprocess / describe / make_report
     docs/                       # data_dictionary, report.pdf, figures
+  gagne_2020/                   # 随伴性ボラティリティ課題（GAD/MDD/対照・online）
+    README.md
+    data/{raw,processed}/
+    scripts/
+    docs/
 ```
 
 ## 各データセットの再現手順（共通の考え方）
