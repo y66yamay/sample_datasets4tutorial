@@ -1,31 +1,30 @@
-# Raw data provenance
+# 生データの出所
 
-## File
-- `choices_diagno.csv.zip` — verbatim copy of the behavioural data file
-  distributed with the NeurIPS 2019 paper implementation.
+## ファイル
+- `choices_diagno.csv.zip` — NeurIPS 2019 論文の実装に同梱されている行動データ
+  ファイルをそのままコピーしたもの。
 
-## Where it came from
-- Repository: <https://github.com/adezfouli/rnn_hypercoder> (path: `data/BD/`)
-- Retrieved: 2026-07-07 via `git clone` (only host reachable in this environment).
+## 取得元
+- リポジトリ: <https://github.com/adezfouli/rnn_hypercoder>（パス: `data/BD/`）
+- 取得日: 2026-07-07、`git clone` 経由（この環境で到達可能だった唯一のホスト）。
 
-## Original / canonical sources
-The same behavioural data is published as a dataset on Figshare (not reachable
-from this environment's network policy at retrieval time — recorded here for
-reference):
+## 正典・元データの所在
+同じ行動データは Figshare にもデータセットとして公開されている（取得時点では
+この環境のネットワークポリシーにより到達不可。参考として記録）:
 
-- PLOS Figshare collection:
+- PLOS Figshare コレクション:
   <https://plos.figshare.com/collections/Models_that_learn_how_humans_learn_The_case_of_decision-making_and_its_disorders/4537250>
-- Figshare dataset:
+- Figshare データセット:
   <https://figshare.com/articles/dataset/Models_that_learn_how_humans_learn_The_case_of_decision-making_and_its_disorders/8257259>
 
-## Associated papers
+## 関連論文
 - Dezfouli, Ashtiani, Ghattas, Nock, Dayan, Ong (2019).
   *Disentangled behavioural representations.* NeurIPS 2019.
 - Dezfouli et al. (2019). *Models that learn how humans learn: The case of
   decision-making and its disorders.* PLOS Computational Biology.
 
-## License
-The `rnn_hypercoder` repository is licensed Apache-2.0
-(see `docs/UPSTREAM_LICENSE_Apache-2.0.txt`). The Figshare dataset record should
-be consulted for the canonical data license (PLOS datasets are typically CC BY).
-Cite the papers above when using this data.
+## ライセンス
+`rnn_hypercoder` リポジトリは Apache-2.0 ライセンス
+（`docs/UPSTREAM_LICENSE_Apache-2.0.txt` を参照）。データ本体の正典ライセンスは
+Figshare のデータセット記録を確認すること（PLOS のデータセットは通常 CC BY）。
+利用時は上記の論文を引用すること。

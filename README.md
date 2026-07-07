@@ -1,98 +1,94 @@
 # bandit_MDD_BPD_bandit
 
-Behavioural data (two-armed bandit task) from **Dezfouli et al. (2019)** for
-unipolar depression (MDD), bipolar disorder (BD) and healthy controls (HC),
-retrieved, validated, preprocessed into an analysis-ready tidy format, and
-summarised with group-level descriptive statistics and figures.
+**Dezfouli et al. (2019)** による2択バンディット課題の行動データ（単極性うつ病
+MDD / 双極性障害 BD / 健常対照 HC）を取得・検証し、分析可能なtidy形式に前処理して、
+グループ別の基本統計量と図でまとめたリポジトリ。
 
-- **Task:** two-choice probabilistic bandit (arms R1 / R2).
-- **Cohort:** 101 subjects — MDD 34, BD 33, HC 34.
-- **Design:** 12 sequences per subject (6 reward conditions × 2 halves) →
-  1212 sequences, 132,251 trials total.
+- **課題:** 2択の確率的バンディット（腕 R1 / R2）
+- **コホート:** 101名 — MDD 34 / BD 33 / HC 34
+- **設計:** 各被験者12系列（6報酬条件 × 2ブロック）→ 1,212系列・132,251試行
 
-## Papers
+## 論文
 - Dezfouli, Ashtiani, Ghattas, Nock, Dayan, Ong. *Disentangled behavioural
   representations.* NeurIPS 2019.
 - Dezfouli et al. *Models that learn how humans learn: The case of
   decision-making and its disorders.* PLOS Computational Biology, 2019.
 
-## Layout
+## ディレクトリ構成
 ```
 data/
   raw/
-    choices_diagno.csv.zip     # verbatim upstream file
-    SOURCE.md                  # provenance, links, license
+    choices_diagno.csv.zip     # 上流の生データそのまま
+    SOURCE.md                  # 出所・リンク・ライセンス
   processed/
-    trials.csv                 # one row per trial (analysis ready)
-    subjects.csv               # one row per subject (group + clinical scores)
-    group_descriptives.csv     # mean / sd / median by group
+    trials.csv                 # 試行単位（分析可能）
+    subjects.csv               # 被験者単位（グループ＋臨床スコア）
+    group_descriptives.csv     # グループ別 平均 / SD / 中央値
 scripts/
-  preprocess.py                # reproducible raw -> processed
-  describe.py                  # descriptives + figures
-  make_report.py               # build docs/report.pdf
+  preprocess.py                # 生データ → 前処理（再現可能）
+  describe.py                  # 記述統計＋図
+  make_report.py               # docs/report.pdf を生成
 docs/
-  report.pdf                   # summary report (stats + figures)
-  data_dictionary.md           # column-by-column reference
+  report.pdf                   # サマリレポート（統計＋図）
+  data_dictionary.md           # カラム定義リファレンス
   figures/
     group_summary.png
     learning_curve.png
   UPSTREAM_LICENSE_Apache-2.0.txt
 ```
 
-## Reproduce
+## 再現手順
 ```bash
 pip install pandas matplotlib
-python3 scripts/preprocess.py     # raw  -> data/processed/{trials,subjects}.csv
-python3 scripts/describe.py       # -> figures + group_descriptives.csv
-python3 scripts/make_report.py    # -> docs/report.pdf
+python3 scripts/preprocess.py     # 生データ → data/processed/{trials,subjects}.csv
+python3 scripts/describe.py       # → 図 + group_descriptives.csv
+python3 scripts/make_report.py    # → docs/report.pdf
 ```
-`preprocess.py` asserts the cohort sizes (34/33/34 = 101) and the 12-sequence
-structure before writing.
+`preprocess.py` は書き出し前に、コホート数（34/33/34 = 101）と12系列構造を
+`assert` で検証します。図・PDFの日本語表示には `IPAGothic` フォントを使用します。
 
-## Groups & variables
-| raw `diag` | code | meaning                   | n   |
-|------------|------|---------------------------|-----|
-| Depression | MDD  | unipolar major depression | 34  |
-| Bipolar    | BD   | bipolar disorder          | 33  |
-| Healthy    | HC   | healthy control           | 34  |
+## グループと変数
+| 元の `diag` | 略号 | 意味            | 人数 |
+|-------------|------|-----------------|------|
+| Depression  | MDD  | 単極性うつ病    | 34   |
+| Bipolar     | BD   | 双極性障害      | 33   |
+| Healthy     | HC   | 健常対照        | 34   |
 
-**Demographics.** The only subject-level variables in this dataset are the
-**diagnosis label** plus two clinical rating scores (`mania_score`,
-`depression_score`) and a mean **press rate** (`press_rate_sec`). There is **no
-age, sex, IQ, education, or medication** information in the released file; check
-the Figshare record (`data/raw/SOURCE.md`) if those are needed.
+**デモグラフィックについて。** 本データに含まれる被験者単位の変数は、**診断ラベル**と
+2つの臨床評価スコア（`mania_score`＝躁、`depression_score`＝抑うつ）、および平均
+**押下速度**（`press_rate_sec`）のみです。**年齢・性別・IQ・学歴・服薬**などの情報は
+公開ファイルには**含まれていません**。必要な場合は Figshare の記録
+（`data/raw/SOURCE.md`）を確認してください。
 
-## Group descriptives (per subject; mean ± sd)
-| metric | HC | MDD | BD |
+## グループ別 記述統計（被験者単位・平均 ± SD）
+| 指標 | HC | MDD | BD |
 |---|---|---|---|
-| Depression score | 1.50 ± 2.06 | 14.32 ± 7.10 | 8.76 ± 6.53 |
-| Mania score | 0.09 ± 0.38 | 2.44 ± 5.43 | 4.42 ± 5.84 |
-| Press rate (s) | 1.65 ± 0.48 | 1.74 ± 0.57 | 1.52 ± 0.42 |
-| Reward rate | 0.114 ± 0.010 | 0.107 ± 0.011 | 0.108 ± 0.009 |
-| P(choose better arm R1) | 0.506 ± 0.059 | 0.513 ± 0.093 | 0.526 ± 0.061 |
-| Trials completed | 1313 ± 333 | 1379 ± 383 | 1234 ± 292 |
+| 抑うつスコア | 1.50 ± 2.06 | 14.32 ± 7.10 | 8.76 ± 6.53 |
+| 躁スコア | 0.09 ± 0.38 | 2.44 ± 5.43 | 4.42 ± 5.84 |
+| 押下速度 (秒) | 1.65 ± 0.48 | 1.74 ± 0.57 | 1.52 ± 0.42 |
+| 報酬率 | 0.114 ± 0.010 | 0.107 ± 0.011 | 0.108 ± 0.009 |
+| 良い腕R1選択率 | 0.506 ± 0.059 | 0.513 ± 0.093 | 0.526 ± 0.061 |
+| 総試行数 | 1313 ± 333 | 1379 ± 383 | 1234 ± 292 |
 
-Clinical scores separate the groups as expected (depression highest in MDD,
-mania highest in BD); behavioural differences are small — the task uses low
-reward probabilities (R1 ≈ 0.08–0.25 vs R2 ≈ 0.05), so preference for the
-better arm is weak across all groups. These are descriptive statistics only
-(no group-difference tests). Full report: [`docs/report.pdf`](docs/report.pdf).
+臨床スコアは想定どおりグループを分離します（抑うつは MDD が最高、躁は BD が最高）。
+一方、行動指標のグループ差は小さいです — 課題の報酬確率が低く（R1 ≈ 0.08〜0.25 に対し
+R2 ≈ 0.05）、良い腕への選好が全群で弱いためです。これらは記述統計のみで、群間の統計的
+検定は行っていません。詳細なレポート: [`docs/report.pdf`](docs/report.pdf)。
 
-### Figures
-![Group descriptives](docs/figures/group_summary.png)
-![Learning curve](docs/figures/learning_curve.png)
+### 図
+![グループ別基本統計量](docs/figures/group_summary.png)
+![学習曲線](docs/figures/learning_curve.png)
 
-## Data source & license
-Raw data was obtained from the authors' implementation repository
-<https://github.com/adezfouli/rnn_hypercoder> (`data/BD/`, Apache-2.0). The
-canonical dataset is also on Figshare (article `8257259`); see
-[`data/raw/SOURCE.md`](data/raw/SOURCE.md) for links and licensing. Please cite
-the papers above when using this data.
+## データの出所・ライセンス
+生データは著者の実装リポジトリ
+<https://github.com/adezfouli/rnn_hypercoder>（`data/BD/`, Apache-2.0）から取得しました。
+正典データは Figshare（記事 `8257259`）にも公開されています。リンクとライセンスは
+[`data/raw/SOURCE.md`](data/raw/SOURCE.md) を参照してください。利用時は上記の論文を
+引用してください。
 
-> Note: at retrieval time (2026-07-07) Figshare / NeurIPS / bioRxiv hosts were
-> not reachable from the build environment's network policy, so the raw file was
-> sourced from the GitHub mirror, which distributes the identical behavioural
-> data.
+> 注: 取得時点（2026-07-07）では、この環境のネットワークポリシーにより Figshare /
+> NeurIPS / bioRxiv のホストに到達できなかったため、同一の行動データを配布している
+> GitHub ミラーから生データを取得しました。
 
-See [`docs/data_dictionary.md`](docs/data_dictionary.md) for full column
-definitions and analysis caveats.
+カラム定義と分析上の注意点は
+[`docs/data_dictionary.md`](docs/data_dictionary.md) を参照してください。

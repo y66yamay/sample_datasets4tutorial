@@ -1,66 +1,61 @@
-# Data dictionary
+# データディクショナリ
 
-## Task
-A two-armed bandit (two-choice) task. On each trial the subject picks one of two
-options (**R1** / **R2**, i.e. C1 / C2 in the paper) and probabilistically
-receives a reward. Each subject completes **12 sequences** (= 6 reward-probability
-`condition`s × 2 experimental halves `block_half`). 101 subjects × 12 = **1212
-sequences** in total.
+## 課題
+2択（two-armed bandit）課題。各試行で被験者は2つの選択肢（**R1** / **R2**、論文中の
+C1 / C2）のいずれかを選び、確率的に報酬を得る。各被験者は **12系列**（= 6つの報酬確率
+`condition` × 2つの実験ブロック `block_half`）を実施する。101名 × 12 = **1,212系列**。
 
-Reward contingency (mean reward rate in the raw data): R1 is always the better
-arm; `condition` scales how much better (R1 ≈ 0.25 / 0.12 / 0.08 across the
-three condition pairs, R2 ≈ 0.05 throughout).
+報酬随伴性（生データでの平均報酬率）: R1 が常に良い腕で、`condition` がその優位度を
+調整する（3つの条件ペアで R1 ≈ 0.25 / 0.12 / 0.08、R2 は一貫して ≈ 0.05）。
 
-## Groups
-| raw `diag` | code | meaning                         | n   |
-|------------|------|---------------------------------|-----|
-| Depression | MDD  | unipolar major depression       | 34  |
-| Bipolar    | BD   | bipolar disorder                | 33  |
-| Healthy    | HC   | healthy control                 | 34  |
-| **total**  |      |                                 | 101 |
+## グループ
+| 元の `diag` | 略号 | 意味                | 人数 |
+|-------------|------|---------------------|------|
+| Depression  | MDD  | 単極性の大うつ病    | 34   |
+| Bipolar     | BD   | 双極性障害          | 33   |
+| Healthy     | HC   | 健常対照            | 34   |
+| **合計**    |      |                     | 101  |
 
-## `data/processed/trials.csv` — one row per trial
-| column            | type  | description |
-|-------------------|-------|-------------|
-| `subject_id`      | str   | subject identifier (e.g. `s_005_`) |
+## `data/processed/trials.csv` — 1行 = 1試行
+| カラム            | 型    | 説明 |
+|-------------------|-------|------|
+| `subject_id`      | str   | 被験者ID（例: `s_005_`） |
 | `group`           | str   | MDD / BD / HC |
-| `sequence`        | int   | 1..12, which of the subject's 12 sequences (raw `trial`) |
-| `condition`       | int   | 1..6, reward-probability condition |
-| `block_half`      | int   | 1 or 2, first/second experimental half (raw `block`) |
-| `step`            | int   | 0-based trial index **within** the sequence, ordered by `time` |
-| `time`            | float | acquisition timestamp (ms) |
-| `key`             | str   | physical key pressed: R1 / R2 |
-| `choice`          | str   | recorded arm choice: R1 / R2 |
-| `action`          | int   | canonical action: 0 = R1, 1 = R2 (from `key`, author mapping) |
-| `outcome`         | str   | O1 / O2 (rewarded outcome types) or `null` (no reward) |
-| `reward`          | int   | 0 / 1 (1 iff `outcome != null`) |
-| `code`            | int   | joint code: 1=R1/no, 2=R2/no, 3=R1/reward, 4=R2/reward |
-| `press_rate_sec`  | float | subject-level mean press rate (s) |
-| `mania_score`     | int   | subject-level mania (ALS) score |
-| `depression_score`| int   | subject-level depression score |
+| `sequence`        | int   | 1〜12、被験者の12系列のうちどれか（元の `trial`） |
+| `condition`       | int   | 1〜6、報酬確率条件 |
+| `block_half`      | int   | 1 または 2、前半/後半の実験ブロック（元の `block`） |
+| `step`            | int   | 系列**内**の試行インデックス（0始まり、`time` 順） |
+| `time`            | float | 取得タイムスタンプ（ミリ秒） |
+| `key`             | str   | 実際に押したキー: R1 / R2 |
+| `choice`          | str   | 記録された腕の選択: R1 / R2 |
+| `action`          | int   | 正準アクション: 0 = R1, 1 = R2（`key` 由来・著者準拠） |
+| `outcome`         | str   | O1 / O2（報酬ありの種類）または `null`（報酬なし） |
+| `reward`          | int   | 0 / 1（`outcome != null` のとき 1） |
+| `code`            | int   | 結合コード: 1=R1/無, 2=R2/無, 3=R1/報酬, 4=R2/報酬 |
+| `press_rate_sec`  | float | 被験者単位の平均押下速度（秒） |
+| `mania_score`     | int   | 被験者単位の躁（ALS）スコア |
+| `depression_score`| int   | 被験者単位の抑うつスコア |
 
-## `data/processed/subjects.csv` — one row per subject
-| column            | type  | description |
-|-------------------|-------|-------------|
-| `subject_id`      | str   | subject identifier |
+## `data/processed/subjects.csv` — 1行 = 1被験者
+| カラム            | 型    | 説明 |
+|-------------------|-------|------|
+| `subject_id`      | str   | 被験者ID |
 | `group`           | str   | MDD / BD / HC |
-| `n_sequences`     | int   | number of sequences (12 for all) |
-| `n_trials`        | int   | total trials completed |
-| `mania_score`     | int   | mania (ALS) score |
-| `depression_score`| int   | depression score |
-| `press_rate_sec`  | float | mean press rate (s) |
-| `mean_reward`     | float | fraction of rewarded trials |
+| `n_sequences`     | int   | 系列数（全員12） |
+| `n_trials`        | int   | 完了した総試行数 |
+| `mania_score`     | int   | 躁（ALS）スコア |
+| `depression_score`| int   | 抑うつスコア |
+| `press_rate_sec`  | float | 平均押下速度（秒） |
+| `mean_reward`     | float | 報酬ありだった試行の割合 |
 
-## Notes / caveats
-- **`key` vs `choice`.** Both are R1/R2 and disagree on ~49% of trials — the
-  physical left/right key is counterbalanced against arm identity across
-  blocks. The canonical `action` follows the **authors' loader**, which derives
-  the action from `key`. Both raw columns are preserved so you can re-derive an
-  arm-based action from `choice` if your analysis needs it.
-- **Trials per sequence vary** (min ~2 up to ~130); sequences are not fixed
-  length. Use `step` for within-sequence position.
-- **No missing subjects.** Group sizes match the paper exactly (34/33/34 = 101);
-  `scripts/preprocess.py` asserts this.
-- **Train/test split.** The paper uses 8 train / 4 test sequences per subject,
-  but the specific split assignment is not encoded in this raw file; construct
-  it deterministically downstream if needed.
+## 注意点
+- **`key` と `choice`。** どちらも R1/R2 の値だが、約49%の試行で一致しない — 左右の
+  物理キーが、ブロックをまたいで腕の識別とカウンターバランスされているため。正準
+  `action` は**著者のローダー**に従い `key` から導出している。両方の生カラムを残して
+  あるので、分析上必要なら `choice` ベースで腕アクションを再定義できる。
+- **系列あたりの試行数は可変**（最小 ≈ 2 から最大 ≈ 130 まで）。系列は固定長ではない。
+  系列内の位置には `step` を使う。
+- **欠損被験者なし。** グループ人数は論文と完全一致（34/33/34 = 101）。
+  `scripts/preprocess.py` がこれを `assert` で検証する。
+- **訓練/テスト分割。** 論文では被験者ごとに 8系列を訓練 / 4系列をテストに分割するが、
+  具体的な割り当ては生ファイルには符号化されていない。必要なら下流で決定的に構成する。

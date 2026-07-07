@@ -19,6 +19,8 @@ import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
+matplotlib.rcParams["font.family"] = "IPAGothic"  # 日本語表示
+matplotlib.rcParams["axes.unicode_minus"] = False
 import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +31,7 @@ FIG = ROOT / "docs" / "figures"
 # validated categorical slots; colour follows the group, never its rank).
 ORDER = ["HC", "MDD", "BD"]
 COLOR = {"HC": "#2a78d6", "MDD": "#eda100", "BD": "#1baf7a"}
-LABEL = {"HC": "HC (healthy)", "MDD": "MDD (unipolar)", "BD": "BD (bipolar)"}
+LABEL = {"HC": "HC（健常）", "MDD": "MDD（単極性うつ）", "BD": "BD（双極性）"}
 
 INK, MUTED, GRID = "#0b0b0b", "#52514e", "#e6e6e2"
 
@@ -59,7 +61,7 @@ def _box_strip(ax, subj, col, title, ylabel):
         jit = (np.arange(len(vals)) % 11 - 5) / 5 * 0.14
         ax.scatter(np.full(len(vals), i) + jit, vals, s=16, color=COLOR[g],
                    edgecolor="white", linewidth=0.5, zorder=3, alpha=0.9)
-        ax.text(i, ax.get_ylim()[1], f"μ={np.mean(vals):.2f}", ha="center",
+        ax.text(i, ax.get_ylim()[1], f"平均={np.mean(vals):.2f}", ha="center",
                 va="bottom", fontsize=8, color=MUTED)
     ax.set_xticks(range(len(ORDER)))
     ax.set_xticklabels(ORDER)
@@ -78,19 +80,19 @@ def make_summary(trials, subj):
     fig, axes = plt.subplots(2, 3, figsize=(12, 7.4))
     fig.patch.set_facecolor("#fcfcfb")
     panels = [
-        ("depression_score", "Depression score", "score"),
-        ("mania_score", "Mania score", "score"),
-        ("press_rate_sec", "Press rate", "seconds"),
-        ("mean_reward", "Reward rate (accuracy proxy)", "P(reward)"),
-        ("p_better", "P(choose better arm R1)", "proportion"),
-        ("n_trials", "Trials completed", "count"),
+        ("depression_score", "抑うつスコア", "スコア"),
+        ("mania_score", "躁スコア", "スコア"),
+        ("press_rate_sec", "押下速度", "秒"),
+        ("mean_reward", "報酬率（正答率の代理）", "報酬確率"),
+        ("p_better", "良い腕R1を選ぶ確率", "割合"),
+        ("n_trials", "総試行数", "回"),
     ]
     for ax, (col, title, yl) in zip(axes.ravel(), panels):
         _box_strip(ax, subj, col, title, yl)
 
     handles = [plt.Line2D([0], [0], marker="o", color="w", label=LABEL[g],
                           markerfacecolor=COLOR[g], markersize=9) for g in ORDER]
-    fig.suptitle("Dezfouli bandit data — group descriptives (per subject)",
+    fig.suptitle("Dezfouli バンディットデータ — グループ別基本統計量（被験者単位）",
                  x=0.02, ha="left", fontsize=13, color=INK, y=0.985)
     fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False,
                fontsize=9.5, bbox_to_anchor=(0.5, 0.945))
@@ -118,9 +120,9 @@ def make_learning_curve(trials):
         ax.text(m.index[-1] + 0.4, m.values[-1], g, color=COLOR[g],
                 fontsize=10, va="center", fontweight="bold")
     ax.axhline(0.5, color=MUTED, lw=1, ls="--", zorder=1)
-    ax.set_xlabel("Trial within sequence (step)", fontsize=10, color=MUTED)
-    ax.set_ylabel("P(choose better arm R1)", fontsize=10, color=MUTED)
-    ax.set_title("Learning within a sequence, by group  (mean ± 95% CI)",
+    ax.set_xlabel("系列内の試行番号（ステップ）", fontsize=10, color=MUTED)
+    ax.set_ylabel("良い腕R1を選ぶ確率", fontsize=10, color=MUTED)
+    ax.set_title("系列内での学習曲線（グループ別、平均 ± 95% 信頼区間）",
                  fontsize=12, color=INK, loc="left", pad=10)
     ax.set_xlim(-0.5, MAXSTEP + 2)
     _style(ax)
