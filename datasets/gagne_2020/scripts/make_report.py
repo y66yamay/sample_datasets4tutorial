@@ -147,7 +147,7 @@ def main():
     with PdfPages(OUT) as pdf:
         info = pdf.infodict()
         info["Title"] = "Gagne 2020 volatility task — サマリレポート"
-        info["Author"] = "bandit_MDD_BPD_bandit"
+        info["Author"] = "sample_datasets4tutorial"
         _text_page(pdf, "Gagne 2020 ボラティリティ課題 — サマリ", overview)
         _table_page(pdf, desc)
         _image_page(pdf, FIG / "exp1_group_summary.png", "exp1 診断群別の症状・行動")

@@ -1,4 +1,6 @@
-# bandit_MDD_BPD_bandit
+# Sample datasets for tutorial
+
+> リポジトリ: [`y66yamay/sample_datasets4tutorial`](https://github.com/y66yamay/sample_datasets4tutorial)
 
 計算モデルフィッティング（**計算論的表現型 / computational phenotyping**）と、
 **精神疾患傾向・症状・診断**との関係を学ぶための、**モデリング実習・デモ用**の

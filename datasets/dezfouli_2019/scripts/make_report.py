@@ -151,7 +151,7 @@ def main():
     with PdfPages(OUT) as pdf:
         d = pdf.infodict()
         d["Title"] = "Dezfouli MDD/BD/HC バンディットデータ — サマリレポート"
-        d["Author"] = "bandit_MDD_BPD_bandit"
+        d["Author"] = "sample_datasets4tutorial"
         _text_page(pdf, "Dezfouli バンディットデータ — サマリ", overview)
         _table_page(pdf, desc)
         _image_page(pdf, FIG / "group_summary.png",
