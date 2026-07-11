@@ -69,3 +69,6 @@ BibTeX と ISSN 等の詳細は [`data/raw/SOURCE.md`](data/raw/SOURCE.md) を�
 取得元 <https://github.com/crgagne/volatility_paper_elife>（`data/` のみ）。
 eLife 論文は **CC-BY 4.0**（DOI: 10.7554/eLife.61387、恒久保管 OSF: osf.io/8mzuj）。
 再配布時は論文とOSFを出典明記し、上記論文を引用すること。
+
+**再配布（クラウド配布等）する場合は [`data/ATTRIBUTION.md`](data/ATTRIBUTION.md) を
+データと一緒に必ず同梱**すること（帰属のコピペ用文面・改変内容を記載）。
