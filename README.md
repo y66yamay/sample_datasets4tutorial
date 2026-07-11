@@ -48,3 +48,21 @@ python3 scripts/make_report.py    # docs/report.pdf
 ## ライセンス・引用
 データセットごとに出所・ライセンスが異なる。各 `datasets/<name>/data/raw/SOURCE.md`
 と `docs/` 内のライセンス表記に従い、対応する原論文を引用すること。
+
+## データの再配布（ワークショップ等での配布について）
+各データは、帰属（attribution）を明記すれば再配布できるライセンスで公開されている。
+
+| データセット | 根拠ライセンス | 再配布 |
+|---|---|---|
+| dezfouli_2019 | PLOS論文 CC BY 4.0 / Figshareデータ 既定CC0 / コード Apache-2.0 | 帰属明記で可 |
+| gagne_2020 | eLife論文 CC BY 4.0（OSFは"No License"だが論文CC BYが根拠） | 帰属明記で可 |
+
+**クラウド等に再ホストして配布する場合は、各データフォルダ内の
+`ATTRIBUTION.md` を必ず一緒に配布すること**（帰属義務を満たすためのコピペ用文面と、
+改変内容の記載を含む）:
+- [`datasets/dezfouli_2019/data/ATTRIBUTION.md`](datasets/dezfouli_2019/data/ATTRIBUTION.md)
+- [`datasets/gagne_2020/data/ATTRIBUTION.md`](datasets/gagne_2020/data/ATTRIBUTION.md)
+
+> 補足: Figshare（dezfouli）の "License" 欄が CC0 か否かは配布前に一度確認を推奨。
+> 上記はいずれも帰属を付ければ安全に配布できる（CC BY/Apache-2.0の義務を満たし、CC0でも推奨に合致）。
+> 本記載は法的助言ではありません。
